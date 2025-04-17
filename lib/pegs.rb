@@ -12,8 +12,9 @@ module CorrectPegs
 
   def self.partial(input, solution)
     results = 0
-    input.split('').each do |n|
-      results += 1 if solution.include?(n)
+    input_arr = input.split('')
+    input_arr.uniq.each do |n|
+      results += [input_arr.count(n), solution.count(n)].min
     end
     results
   end
