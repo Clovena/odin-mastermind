@@ -15,23 +15,26 @@ class Game
     puts 'Take a guess: '
     guess = gets.chomp
 
-    full_pegs = CorrectPegs.full(guess, code)
-    partial_pegs = CorrectPegs.partial(guess, code)
+    total_pegs = CorrectPegs.all_pegs(guess, code)
+    full_correct = CorrectPegs.proper_place(guess, code)
+    partial_correct = total_pegs - full_correct
 
-    puts "Correct numbers with correct placement: #{full_pegs}"
-    puts "Correct numbers with wrong placement: #{partial_pegs - full_pegs}."
+    puts "Correct numbers with correct placement: #{full_correct}"
+    puts "Correct numbers with wrong placement: #{partial_correct}."
   end
 end
 
 # Collect all information for one game
 class Mastermind
+  attr_accessor :game
+
   def initialize
     @turn = 0
     @game = Game.new
   end
 
   def gameplay
-    while @turn < 10
+    while @turn < 5
       @game.make_guess
       @turn += 1
     end
@@ -39,4 +42,5 @@ class Mastermind
 end
 
 game1 = Mastermind.new
+p game1.game.code
 game1.gameplay

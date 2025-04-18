@@ -2,19 +2,27 @@
 
 # Provide information on guesses
 module CorrectPegs
-  def self.full(input, solution)
+  def self.arr_to_hash(arr)
+    arr.each_with_object(Hash.new(0)) do |vote, result|
+      result[vote] += 1
+    end
+  end
+
+  def self.all_pegs(input, solution)
     results = 0
-    input.split('').each_with_index do |n, i|
-      results += 1 if n == solution[i]
+    input_hash = arr_to_hash(input.split(''))
+    solution_hash = arr_to_hash(solution)
+
+    input_hash.each_pair do |key, value|
+      results += [solution_hash[key], value].min
     end
     results
   end
 
-  def self.partial(input, solution)
+  def self.proper_place(input, solution)
     results = 0
-    input_arr = input.split('')
-    input_arr.uniq.each do |n|
-      results += [input_arr.count(n), solution.count(n)].min
+    input.split('').each_with_index do |n, i|
+      results += 1 if n == solution[i]
     end
     results
   end
