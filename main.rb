@@ -15,7 +15,7 @@ class Mastermind
     @solved = false
   end
 
-  def gameplay
+  def play
     puts 'Welcome to Mastermind!'
     puts 'Generating a code...'
     while @turn < @max_turns && !@solved
@@ -26,6 +26,6 @@ class Mastermind
   end
 end
 
-game1 = Mastermind.new
+game = Mastermind.new
 # p game1.game.code
-game1.gameplay
+game.play
