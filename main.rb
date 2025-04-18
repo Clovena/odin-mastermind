@@ -11,17 +11,18 @@ class Mastermind
   def initialize
     @game = Game.new
     @turn = 0
+    @max_turns = 10
     @solved = false
   end
 
   def gameplay
     puts 'Welcome to Mastermind!'
     puts 'Generating a code...'
-    while @turn < 10 && !@solved
+    while @turn < @max_turns && !@solved
       @solved = @game.make_guess
       @turn += 1
     end
-    puts 'Better luck next time...' if @turn == 10
+    puts 'Better luck next time...' if @turn == @max_turns
   end
 end
 
