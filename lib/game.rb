@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'lib/codemaker'
-require_relative 'lib/pegs'
-
 # Store game metadata information
 class Game
   attr_accessor :turn, :code
@@ -27,24 +24,3 @@ class Game
     input == solution
   end
 end
-
-# Collect all information for one game
-class Mastermind
-  attr_accessor :game
-
-  def initialize
-    @turn = 0
-    @game = Game.new
-  end
-
-  def gameplay
-    while @turn < 5
-      @game.make_guess
-      @turn += 1
-    end
-  end
-end
-
-game1 = Mastermind.new
-p game1.game.code
-game1.gameplay
